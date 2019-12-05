@@ -14,11 +14,42 @@ tokens = (
     'NUMBER',
     'UNDERSCORE',
     'SPACE',
+    'DELETE',
+    'CREATE',
+    'UPDATE',
+    'CONNECT',
+    'DISCONNECT',
 
 )
 
 t_UNDERSCORE = r'\_'
 t_SPACE = r'\ '
+
+def t_DELETE(t):
+    r'Delete'
+    t.type = 'DELETE'
+    return t
+
+def t_CONNECT(t):
+    r'Connect'
+    t.type = 'CONNECT'
+    return t
+
+def t_UPDATE(t):
+    r'Update'
+    t.type = 'UPDATE'
+    return t
+
+def t_DISCONNECT(t):
+    r'Disconnect'
+    t.type = 'DISCONNECT'
+    return t
+
+def t_CREATE(t):
+    r'Create'
+    t.type = 'CREATE'
+    return t
+
 
 def t_NUMBER(t):
     r'\d+'
@@ -40,7 +71,7 @@ lex = lexer.lex()
 
 
 #For testing lexer
-lexer.input("Create_server")
+lexer.input("Connect")
 
 while True:
     tok = lexer.token()
