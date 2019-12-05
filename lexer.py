@@ -10,21 +10,40 @@ keywords = {
 }
 
 tokens = (
-    'Letter',
-    'Number',
-
+    'NAME',
+    'NUMBER',
+    'UNDERSCORE',
+    'SPACE',
 
 )
 
-def t_Number(t):
-    r'\N+'
+t_UNDERSCORE = r'\_'
+t_SPACE = r'\ '
+
+def t_NUMBER(t):
+    r'\d+'
     t.value = int(t.value)
     return t
 
-def t_Letter(t):
-    r'[a-zA-Z]'
-    t.type = keywords.get(t.value, "Letter")
+def t_NAME(t):
+    r'[a-zA-Z][a-zA-Z_0-9]*'
+    t.type = 'NAME'
+    return t
 
+
+def t_error(t):
+     print("Illegal character '%s'" % t.value[0])
+     t.lexer.skip(1)
 
 
 lex = lexer.lex()
+
+
+#For testing lexer
+lexer.input("Create_server")
+
+while True:
+    tok = lexer.token()
+    if not tok:
+        break
+    print(tok)
