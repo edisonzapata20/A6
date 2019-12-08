@@ -19,7 +19,6 @@ tokens = (
     'UPDATE',
     'CONNECT',
     'DISCONNECT',
-
 )
 
 t_UNDERSCORE = r'\_'
@@ -71,7 +70,7 @@ lex = lexer.lex()
 
 
 #For testing lexer
-lexer.input("Connect")
+lexer.input("Disconnect server")
 
 while True:
     tok = lexer.token()

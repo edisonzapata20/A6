@@ -1,5 +1,4 @@
 import ply.yacc as yac
-
 from lexer import tokens
 
 def p_Server(p):
@@ -14,13 +13,21 @@ def p_Server(p):
 
 def p_ServerOperations(p):
     '''
-    ServerOperations : UPDATE Server
-                    | CONNECT Server
-                    | DISCONNECT Server
-                    | CREATE Server
-                    | DELETE Server
+    ServerOperations : UPDATE
+                    | CONNECT
+                    | DISCONNECT
+                    | CREATE
+                    | DELETE
     '''
-    p[0] = (p[2], [1])
+    p[0] = p[1]
+
+def p_ServerInteraction(p):
+    '''
+
+    ServerInteraction : ServerOperations Server
+
+    '''
+    p[0] = p[1]
 
 def p_error(p):
     if p is not None:
@@ -38,3 +45,14 @@ while True:
     if not s: continue
     result = parser.parse(s)
     print(result)
+
+
+#def p_ServerOperations(p):
+    '''
+  #  ServerOperations : UPDATE Server
+   #                 | CONNECT Server
+    #                | DISCONNECT Server
+   #                 | CREATE Server
+  #                  | DELETE Server
+  #  '''
+  #  p[0] = (p[2], [1])
