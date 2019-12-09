@@ -1,5 +1,5 @@
 import ply.yacc as yac
-from lexer import tokens
+
 
 def p_Server(p):
     '''
