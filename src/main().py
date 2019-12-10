@@ -34,7 +34,7 @@ main()
 # Define socket object
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # Connect to server
-s.connect((values[0], int(values[1])))
+s.connect((socket.gethostname(), int(values[1])))
 
 while True:
     full_message = ''

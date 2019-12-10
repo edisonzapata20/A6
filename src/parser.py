@@ -1,58 +1,47 @@
-import ply.yacc as yac
+import ply.yacc as yacc
+import ClientServer
+import lexer
+tokens = lexer.tokens
+
+from lexer import help
 
 
-def p_Server(p):
-    '''
-    Server :    NAME
-              | UNDERSCORE
-              | SPACE
-              | NUMBER
-    '''
-    p[0] = p[1]
+
+def p_ServerName(p):
+
+    """ServerName : CONNECT SPACE NAME
+                    | DISCONNECT SPACE NAME
+    """
 
 
-def p_ServerOperations(p):
-    '''
-    ServerOperations : UPDATE
-                    | CONNECT
-                    | DISCONNECT
-                    | CREATE
-                    | DELETE
-    '''
-    p[0] = p[1]
+    print(p[3])
+    a = p[3]
+    if p[1] == "Connect":
+        ClientServer.main()
+        print('Server running')
+    if p[1] == "Disconnect" and p[3] == a:
+        print("Server disconnected")
 
-def p_ServerInteraction(p):
-    '''
 
-    ServerInteraction : ServerOperations Server
-
-    '''
-    p[0] = p[1]
 
 def p_error(p):
-    if p is not None:
+    if p:
         print ('Syntax error at line %s Error %s' % (p.lineno, p.value))
     else:
         print('Syntax error in input')
 
-parser = yac.yacc()
+
+parser = yacc.yacc()
 
 while True:
     try:
-        s = input('')   # use input() on Python 3
+        s = input('ServerCommunication>')
     except EOFError:
         break
     if not s: continue
+    if (s == 'help'):
+        help()
+        continue
     result = parser.parse(s)
-    print(result)
 
 
-#def p_ServerOperations(p):
-    '''
-  #  ServerOperations : UPDATE Server
-   #                 | CONNECT Server
-    #                | DISCONNECT Server
-   #                 | CREATE Server
-  #                  | DELETE Server
-  #  '''
-  #  p[0] = (p[2], [1])

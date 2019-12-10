@@ -6,7 +6,7 @@ HEADERSIZE = 10
 # Define socket object
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # Bind of socket with IP and port
-s.bind(("localhost", 7777))  # Socket -> endpoint that recieves data
+s.bind((socket.gethostname(), 7777))
 # Prepares for message
 s.listen(5)
 

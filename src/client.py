@@ -5,7 +5,7 @@ HEADERSIZE = 10
 # Define socket object
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # Connect to server
-s.connect((socket.gethostname(), 7777))
+s.connect((socket.gethostname(), int(values[1])))
 while True:
     full_message = ''
     new_msg = True
