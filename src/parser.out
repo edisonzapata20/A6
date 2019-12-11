@@ -1,0 +1,87 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    EQUAL
+    SERVER
+
+Grammar
+
+Rule 0     S' -> ServerAssign_Connection
+Rule 1     ServerAssign_Connection -> CONNECT SPACE NAME
+Rule 2     ServerAssign_Connection -> DISCONNECT SPACE NAME
+
+Terminals, with rules where they appear
+
+CONNECT              : 1
+DISCONNECT           : 2
+EQUAL                : 
+NAME                 : 1 2
+SERVER               : 
+SPACE                : 1 2
+error                : 
+
+Nonterminals, with rules where they appear
+
+ServerAssign_Connection : 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . ServerAssign_Connection
+    (1) ServerAssign_Connection -> . CONNECT SPACE NAME
+    (2) ServerAssign_Connection -> . DISCONNECT SPACE NAME
+
+    CONNECT         shift and go to state 2
+    DISCONNECT      shift and go to state 3
+
+    ServerAssign_Connection        shift and go to state 1
+
+state 1
+
+    (0) S' -> ServerAssign_Connection .
+
+
+
+state 2
+
+    (1) ServerAssign_Connection -> CONNECT . SPACE NAME
+
+    SPACE           shift and go to state 4
+
+
+state 3
+
+    (2) ServerAssign_Connection -> DISCONNECT . SPACE NAME
+
+    SPACE           shift and go to state 5
+
+
+state 4
+
+    (1) ServerAssign_Connection -> CONNECT SPACE . NAME
+
+    NAME            shift and go to state 6
+
+
+state 5
+
+    (2) ServerAssign_Connection -> DISCONNECT SPACE . NAME
+
+    NAME            shift and go to state 7
+
+
+state 6
+
+    (1) ServerAssign_Connection -> CONNECT SPACE NAME .
+
+    $end            reduce using rule 1 (ServerAssign_Connection -> CONNECT SPACE NAME .)
+
+
+state 7
+
+    (2) ServerAssign_Connection -> DISCONNECT SPACE NAME .
+
+    $end            reduce using rule 2 (ServerAssign_Connection -> DISCONNECT SPACE NAME .)
+
