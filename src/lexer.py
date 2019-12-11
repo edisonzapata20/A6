@@ -11,7 +11,6 @@ tokens = [
     'NAME',
     'SPACE',
     'CONNECT',
-    'DISCONNECT',
     'SERVER',
     'TO'
 
@@ -33,11 +32,6 @@ def t_CONNECT(t):
 def t_SERVER(t):
     r'Server'
     t.type = 'SERVER'
-    return t
-
-def t_DISCONNECT(t):
-    r'Disconnect'
-    t.type = 'DISCONNECT'
     return t
 
 def t_NAME(t):
