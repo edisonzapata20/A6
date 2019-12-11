@@ -10,7 +10,6 @@ from lexer import help
 
 def p_ServerAssign_Connection(p):
     """ServerAssign_Connection : CONNECT SPACE TO SPACE SERVER SPACE NAME
-                    | DISCONNECT SPACE SERVER NAME
     """
 
     if p[1] == "Connect":

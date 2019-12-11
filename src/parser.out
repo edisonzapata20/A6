@@ -4,15 +4,13 @@ Grammar
 
 Rule 0     S' -> ServerAssign_Connection
 Rule 1     ServerAssign_Connection -> CONNECT SPACE TO SPACE SERVER SPACE NAME
-Rule 2     ServerAssign_Connection -> DISCONNECT SPACE SERVER NAME
 
 Terminals, with rules where they appear
 
 CONNECT              : 1
-DISCONNECT           : 2
-NAME                 : 1 2
-SERVER               : 1 2
-SPACE                : 1 1 1 2
+NAME                 : 1
+SERVER               : 1
+SPACE                : 1 1 1
 TO                   : 1
 error                : 
 
@@ -26,10 +24,8 @@ state 0
 
     (0) S' -> . ServerAssign_Connection
     (1) ServerAssign_Connection -> . CONNECT SPACE TO SPACE SERVER SPACE NAME
-    (2) ServerAssign_Connection -> . DISCONNECT SPACE SERVER NAME
 
     CONNECT         shift and go to state 2
-    DISCONNECT      shift and go to state 3
 
     ServerAssign_Connection        shift and go to state 1
 
@@ -43,73 +39,45 @@ state 2
 
     (1) ServerAssign_Connection -> CONNECT . SPACE TO SPACE SERVER SPACE NAME
 
-    SPACE           shift and go to state 4
+    SPACE           shift and go to state 3
 
 
 state 3
 
-    (2) ServerAssign_Connection -> DISCONNECT . SPACE SERVER NAME
+    (1) ServerAssign_Connection -> CONNECT SPACE . TO SPACE SERVER SPACE NAME
 
-    SPACE           shift and go to state 5
+    TO              shift and go to state 4
 
 
 state 4
 
-    (1) ServerAssign_Connection -> CONNECT SPACE . TO SPACE SERVER SPACE NAME
+    (1) ServerAssign_Connection -> CONNECT SPACE TO . SPACE SERVER SPACE NAME
 
-    TO              shift and go to state 6
+    SPACE           shift and go to state 5
 
 
 state 5
 
-    (2) ServerAssign_Connection -> DISCONNECT SPACE . SERVER NAME
+    (1) ServerAssign_Connection -> CONNECT SPACE TO SPACE . SERVER SPACE NAME
 
-    SERVER          shift and go to state 7
+    SERVER          shift and go to state 6
 
 
 state 6
 
-    (1) ServerAssign_Connection -> CONNECT SPACE TO . SPACE SERVER SPACE NAME
+    (1) ServerAssign_Connection -> CONNECT SPACE TO SPACE SERVER . SPACE NAME
 
-    SPACE           shift and go to state 8
+    SPACE           shift and go to state 7
 
 
 state 7
 
-    (2) ServerAssign_Connection -> DISCONNECT SPACE SERVER . NAME
+    (1) ServerAssign_Connection -> CONNECT SPACE TO SPACE SERVER SPACE . NAME
 
-    NAME            shift and go to state 9
+    NAME            shift and go to state 8
 
 
 state 8
-
-    (1) ServerAssign_Connection -> CONNECT SPACE TO SPACE . SERVER SPACE NAME
-
-    SERVER          shift and go to state 10
-
-
-state 9
-
-    (2) ServerAssign_Connection -> DISCONNECT SPACE SERVER NAME .
-
-    $end            reduce using rule 2 (ServerAssign_Connection -> DISCONNECT SPACE SERVER NAME .)
-
-
-state 10
-
-    (1) ServerAssign_Connection -> CONNECT SPACE TO SPACE SERVER . SPACE NAME
-
-    SPACE           shift and go to state 11
-
-
-state 11
-
-    (1) ServerAssign_Connection -> CONNECT SPACE TO SPACE SERVER SPACE . NAME
-
-    NAME            shift and go to state 12
-
-
-state 12
 
     (1) ServerAssign_Connection -> CONNECT SPACE TO SPACE SERVER SPACE NAME .
 
