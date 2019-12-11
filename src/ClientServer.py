@@ -2,10 +2,17 @@ import socket
 
 
 
+sockt = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sockt.bind((socket.gethostname(), 7777))
+sockt.listen(5)
 
-def main():
-    sockt = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sockt.connect((socket.gethostname(), 7777))
 
-    msg = sockt.recv(1024)
-    print(msg.decode("utf-8"))
+def close():
+    sockt.shutdown()
+    sockt.close()
+
+def run():
+    while True:
+        clientsocket, address = sockt.accept()
+        print(f"Connection from {address} established!")
+        clientsocket.send(bytes("Server has been accessed","utf-8"))

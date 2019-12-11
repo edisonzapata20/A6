@@ -1,10 +1,9 @@
 import ply.lex as lexer
-import ply.yacc as yac
 
 
 
 def help():
-    print('''Server PL
+    print('''To connect to a server type 'Connect to Server SERVERNAME' 
     ''')
 
 
@@ -13,19 +12,18 @@ tokens = [
     'SPACE',
     'CONNECT',
     'DISCONNECT',
-    'EQUAL',
-    'SERVER'
+    'SERVER',
+    'TO'
 
 ]
 
 t_SPACE = r'\ '
-t_EQUAL = r'='
 
 
-#def t_NUMBER(t):
-   # r'\d+'
-   # t.value = int(t.value)
-    #return t
+def t_TO(t):
+    r'to'
+    t.type = 'TO'
+    return t
 
 def t_CONNECT(t):
     r'Connect'
@@ -57,7 +55,8 @@ def t_error(t):
 lex = lexer.lex()
 
 
-lexer.input("Connect=a2")
+# To test Lexer
+#lexer.input("Connect=a2")
 
 #while True:
    # tok = lexer.token()
