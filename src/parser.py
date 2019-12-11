@@ -1,25 +1,28 @@
 import ply.yacc as yacc
 import lexer
-import yanise
+import CS
 
 tokens = lexer.tokens
+msg = ""
 
 from lexer import help
-
-
 
 def p_ServerAssign_Connection(p):
     """ServerAssign_Connection : CONNECT SPACE TO SPACE SERVER SPACE NAME
     """
 
     if p[1] == "Connect":
-        print("Server" + " " + p[7] + " " + "running")
-        yanise.main()
+        msg = input("Ask the server a question> ")
 
-
+        if len(msg) != 0 and msg[len(msg) - 1] == '?':
+            print("Server" + " " + p[7] + " " + "running")
+            cs = CS.CS(msg)
+            cs.main()
+        else:
+            print("Invalid or empty message. Message must be a question ending in '?'")
 
 def p_error(p):
-    print("Syntax error! Command should be 'Connect/Disconnect servername' ")
+    print("Syntax error! Command should be 'Connect to Server servername' ")
 
 
 parser = yacc.yacc()

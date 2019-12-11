@@ -3,18 +3,18 @@ import socket, time
 
 
 def client():
-    print("Thread starts")
+    # print("Thread starts")
     time.sleep(1)
-    print("Thread connects")
+    # print("Thread connects")
     sock = socket.create_connection((socket.gethostname(), 8888))
     # sock=socket.create_connection(("localhost",8888))
-    print("Thread after connect")
+    # print("Thread after connect")
     sock.sendall(b"Hello from client")
     sock.close()
-    print("Thread ends")
+    # print("Thread ends")
 
 
-def main():
+def main(msg):
     serv = socket.socket()
     serv.bind((socket.gethostname(), 8888))
     # serv.bind(("localhost",8888))
@@ -22,9 +22,9 @@ def main():
     # serv.bind(("",8888))
     serv.listen(10)
     start_new_thread(client, ())
-    print("Before accept")
+    # print("Before accept")
     s, c = serv.accept()
-    print("After accept " + c[ 0 ])
+    # print("After accept " + c[ 0 ])
     print("Message: " + s.recv(1024).decode("ASCII"))
     s.close()
     serv.close()
@@ -32,3 +32,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
