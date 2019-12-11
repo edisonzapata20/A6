@@ -5,31 +5,22 @@ tokens = lexer.tokens
 
 from lexer import help
 
+a = []
 
+def p_ServerAssign_Connection(p):
 
-def p_ServerName(p):
-
-    """ServerName : CONNECT SPACE NAME
+    """ServerAssign_Connection : CONNECT SPACE NAME
                     | DISCONNECT SPACE NAME
     """
-
-
-    print(p[3])
-    a = p[3]
     if p[1] == "Connect":
-        ClientServer.main()
-        print('Server running')
-    if p[1] == "Disconnect" and p[3] == a:
-        print("Server disconnected")
-
-
+        a.append(p[3])
+        print("Server" + " " + p[3] + " " +  "running")
+    if p[1] == "Disconnect" and len(a) != 0 and a[0] == p[3]:
+        a.remove(a[0])
+        print("Server" + " " + p[3] + " " +  "disconnected")
 
 def p_error(p):
-    if p:
-        print ('Syntax error at line %s Error %s' % (p.lineno, p.value))
-    else:
-        print('Syntax error in input')
-
+    print("Syntax error!")
 
 parser = yacc.yacc()
 

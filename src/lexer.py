@@ -12,12 +12,14 @@ tokens = [
     'NAME',
     'SPACE',
     'CONNECT',
-    'DISCONNECT'
+    'DISCONNECT',
+    'EQUAL',
+    'SERVER'
 
 ]
 
 t_SPACE = r'\ '
-
+t_EQUAL = r'='
 
 
 #def t_NUMBER(t):
@@ -30,6 +32,10 @@ def t_CONNECT(t):
     t.type = 'CONNECT'
     return t
 
+def t_SERVER(t):
+    r'Server'
+    t.type = 'SERVER'
+    return t
 
 def t_DISCONNECT(t):
     r'Disconnect'
@@ -51,11 +57,10 @@ def t_error(t):
 lex = lexer.lex()
 
 
-#For testing lexer
-#lexer.input("Connect")
+lexer.input("Connect=a2")
 
 #while True:
    # tok = lexer.token()
    # if not tok:
-    #    break
-   # print(tok)
+   #   break
+  #  print(tok)
