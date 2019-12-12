@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'CONNECT NAME SERVER SPACE TOServerAssign_Connection : CONNECT SPACE TO SPACE SERVER SPACE NAME\n    '
+_lr_signature = 'CONNECT DISCONNECT NAME SERVER SPACE TOServerAssign_Connection : CONNECT SPACE TO SPACE SERVER SPACE NAME\n                                | DISCONNECT\n    '
     
-_lr_action_items = {'CONNECT':([0,],[2,]),'$end':([1,8,],[0,-1,]),'SPACE':([2,4,6,],[3,5,7,]),'TO':([3,],[4,]),'SERVER':([5,],[6,]),'NAME':([7,],[8,]),}
+_lr_action_items = {'CONNECT':([0,],[2,]),'DISCONNECT':([0,],[3,]),'$end':([1,3,9,],[0,-2,-1,]),'SPACE':([2,5,7,],[4,6,8,]),'TO':([4,],[5,]),'SERVER':([6,],[7,]),'NAME':([8,],[9,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -27,5 +27,6 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> ServerAssign_Connection","S'",1,None,None,None),
-  ('ServerAssign_Connection -> CONNECT SPACE TO SPACE SERVER SPACE NAME','ServerAssign_Connection',7,'p_ServerAssign_Connection','parser.py',12),
+  ('ServerAssign_Connection -> CONNECT SPACE TO SPACE SERVER SPACE NAME','ServerAssign_Connection',7,'p_ServerAssign_Connection','parser.py',13),
+  ('ServerAssign_Connection -> DISCONNECT','ServerAssign_Connection',1,'p_ServerAssign_Connection','parser.py',14),
 ]

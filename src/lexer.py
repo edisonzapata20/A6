@@ -1,10 +1,11 @@
 import ply.lex as lexer
 
-
-
 def help():
+    print("Welcome to CSFlow, a programming language to simplify communication between devices.\n")
     print('''To connect to a server type 'Connect to Server SERVERNAME' 
     ''')
+    print("Then, type a question ending in '?' to ask the server.")
+    print("To close program, type 'Disconnect'.")
 
 
 tokens = [
@@ -12,8 +13,8 @@ tokens = [
     'SPACE',
     'CONNECT',
     'SERVER',
-    'TO'
-
+    'TO',
+    'DISCONNECT'
 ]
 
 t_SPACE = r'\ '
@@ -27,6 +28,11 @@ def t_TO(t):
 def t_CONNECT(t):
     r'Connect'
     t.type = 'CONNECT'
+    return t
+
+def t_DISCONNECT(t):
+    r'Disconnect'
+    t.type = 'DISCONNECT'
     return t
 
 def t_SERVER(t):

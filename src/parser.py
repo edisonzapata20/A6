@@ -1,3 +1,5 @@
+import sys
+
 import ply.yacc as yacc
 import lexer
 import CS
@@ -9,6 +11,7 @@ from lexer import help
 
 def p_ServerAssign_Connection(p):
     """ServerAssign_Connection : CONNECT SPACE TO SPACE SERVER SPACE NAME
+                                | DISCONNECT
     """
 
     if p[1] == "Connect":
@@ -20,6 +23,8 @@ def p_ServerAssign_Connection(p):
             cs.main()
         else:
             print("Invalid or empty message. Message must be a question ending in '?'")
+    elif p[1] == "Disconnect":
+        sys.exit()
 
 def p_error(p):
     print("Syntax error! Command should be 'Connect to Server servername' ")
